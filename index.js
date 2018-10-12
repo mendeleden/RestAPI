@@ -15,4 +15,14 @@ app.get('/', function (req, res) {
 app.get('/api/test', function (req, res) {
 	res.send([1,2,3]);
 })
+
+app.get('/apm/justin', function (req, res) {
+	res.send('im brother batman');
+});
+
+
+app.get('/apm/dwyer', function (req, res) {
+	res.send('hodor');
+});
+
 app.listen(PORT, () => console.log(`Listening on ${ PORT }`))
