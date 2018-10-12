@@ -5,11 +5,14 @@ var bodyParser = require('body-parser');
 var app = express();
 const PORT = process.env.PORT || 5000
 
-const courses = [
+var courses = [
 	{ id : 1, name: 'course 1'},
 	{ id : 2, name: 'course 2'},
 	{ id : 3, name: 'course 3'},
 ];
+
+app.use(express.json()); // middleware to process json
+
 app.set('port', (process.env.PORT || 5000))
 
 app.get('/', function (req, res) {
@@ -34,6 +37,16 @@ app.get('/api/courses/:id', function (req, res) {
 	res.send(cc);
 });
 
+app.post('/api/courses', function (req, res) {
+	const ctmp =
+	{
+		id : courses.length +1,
+		name : req.body.name	
+	};
+	courses.push(ctmp);
+
+	res.send(ctmp);
+});
 
 
 
