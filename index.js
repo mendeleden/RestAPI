@@ -1,19 +1,17 @@
 const cool = require('cool-ascii-faces')
-const express = require('express')
+var express = require('express')
 const path = require('path')
 const PORT = process.env.PORT || 5000
 
+var app = express();
 
+app.set('PORT', (process.env.PORT || 5000))
 
-express()
-  .use(express.static(path.join(__dirname, 'public')))
-  .set('views', path.join(__dirname, 'views'))
-  .set('view engine', 'ejs')
-  .get('/', (req, res) => res.send('hello world'))
-  .get('/api/test', (req, res) => res.send([1,2,3]))
-  .get('/cool', (req, res) => res.send(cool()))
-  .listen(PORT, () => console.log(`Listening on ${ PORT }`))
+app.get('/', (req, res) => {
+	res.send('hello world');
+});
 
-
-
-
+app.get('/api/test', (req, res) => {
+	res.send([1,2,3]);
+})
+app.listen(5000, () => console.log('listening onoo port 5000'));
