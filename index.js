@@ -15,4 +15,4 @@ app.get('/', function (req, res) {
 app.get('/api/test', function (req, res) {
 	res.send([1,2,3]);
 })
-app..listen(PORT, () => console.log(`Listening on ${ PORT }`))
+app.listen(PORT, () => console.log(`Listening on ${ PORT }`))
