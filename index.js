@@ -27,6 +27,6 @@ app.get('/apm/dwyer', function (req, res) {
 
 
 app.get('/apm/janja', function (req, res) {
-	res.send(<img src="https://umassathletics.com/images/2016/9/21/2016_17_um_TENNIS_0033_Janja_Kovacevic.jpg">);
+	res.send('<img src="https://umassathletics.com/images/2016/9/21/2016_17_um_TENNIS_0033_Janja_Kovacevic.jpg">');
 });
 app.listen(PORT, () => console.log(`Listening on ${ PORT }`))
