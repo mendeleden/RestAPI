@@ -39,7 +39,7 @@ app.get('/api/test', function (req, res) {
 app.get('/api/objects', function (req, res) {
 	var arr=[];
 	for(i=0;i<objects.length; i++){
-	console.log(objects[i].uid);
+	
 	var str = "https://infinite-crag-79113.herokuapp.com/api/objects/";
 	var str = str.concat(objects[i].uid);
 	arr.push({"url": str});	
@@ -49,7 +49,7 @@ app.get('/api/objects', function (req, res) {
 
 
 app.get('/api/objects/:uid', function (req, res) {
-	console.log(req.params.uid);
+	
 	
 	var cc =objects.find(c=> c.uid == (req.params.uid));
 	if(!cc)
@@ -64,8 +64,6 @@ app.post('/api/objects', function (req, res) {
 
 	var inputkeys = Object.keys(req.body);
 	var inputvalues = Object.values(req.body);
-	console.log(inputkeys);
-	console.log(inputvalues);
 	
 	for(i=0;i<inputkeys.length;i++)
 	{
@@ -77,22 +75,27 @@ app.post('/api/objects', function (req, res) {
 });
 
 app.put('/api/objects/:uid', function (req, res) {
-	var cc =objects.find(c=> c.uid == parseInt(req.params.uid));
+	
+	var cc =objects.find(c=> c.uid == req.params.uid);
 	if(!cc)
 		return res.status(404).send('didnt find');	
 	var inputkeys = Object.keys(req.body);
 	var inputvalues = Object.values(req.body);
+	var tmp = {uid : req.params.uid};
 	for(i=0;i<inputkeys.length;i++)
 	{
-		cc[inputkeys[i]] = inputvalues[i];
+		if(inputkeys[i] != 'uid')
+			tmp[inputkeys[i]] = inputvalues[i];
 	}
-
-	res.send(cc);
+	const index = objects.indexOf(cc);
+	objects.splice(index, 1);
+	objects.push(tmp);
+	res.send(tmp);
 
 });
 
 app.delete('/api/objects/:uid', function (req, res) {
-	var cc =objects.find(c=> c.uid == parseInt(req.params.uid));
+	var cc =objects.find(c=> c.uid == req.params.uid);
 	if(!cc)
 		res.status(404).send('didnt find');
 	const index = objects.indexOf(cc);
