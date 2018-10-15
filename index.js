@@ -49,6 +49,8 @@ app.get('/api/objects', function (req, res) {
 
 
 app.get('/api/objects/:uid', function (req, res) {
+	console.log(req.params.uid);
+	
 	var cc =objects.find(c=> c.uid == (req.params.uid));
 	if(!cc)
 		res.status(404).send('didnt find');
