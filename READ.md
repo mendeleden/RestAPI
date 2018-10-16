@@ -15,16 +15,3 @@ heroku open //open app in browser
 
 Testing the application :
 In order to test all the Get, Delete, Put and Post request I used Postman.
-
-
-------------------------------------
-Quick setup:
-git clone https://github.com/mendeleden/RestAPI.git
-cd RestAPI
-heroku create
-git init
-git add .
-git commit -m "first commit"
-git push heroku master
-heroku open 
-
