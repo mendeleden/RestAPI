@@ -1,11 +1,10 @@
-const cool = require('cool-ascii-faces');
 var express = require('express');
 var path = require('path');
 var uniqid = require('uniqid');
 var bodyParser = require('body-parser');
 var app = express();
 const PORT = process.env.PORT || 5000
-const weburl ='https://infinite-crag-79113.herokuapp.com/';
+const weburl ='https://cisco-json.herokuapp.com/';
 var objects = [];
 
 app.use(express.json({ //determine if request contains malformed object 
