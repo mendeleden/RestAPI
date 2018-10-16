@@ -6,18 +6,15 @@ var uniqid = require('uniqid');
 var bodyParser = require('body-parser');
 var app = express();
 const PORT = process.env.PORT || 5000
-const weburl ='https://infinite-crag-79113.herokuapp.com';
-var objects = [
-	{ uid : 1, name: 'course 1'},
-	{ uid : 2, name: 'course 2'},
-	{ uid : 3, name: 'course 3'},
-];
+const weburl ='https://infinite-crag-79113.herokuapp.com/api/objects/';
+var objects = [];
 
 app.use(express.json({
   verify : (req, res, buf, encoding) => {
     try {
       JSON.parse(buf);
     } catch(e) {
+      console.log(req.url);
       res.status(404).send({"verb": req.method, "url": weburl.concat(req.url), "message": 'NOT A JSON Object'});
       throw Error('invalid JSON');
     }
@@ -40,8 +37,8 @@ app.get('/api/objects', function (req, res) {
 	var arr=[];
 	for(i=0;i<objects.length; i++){
 	
-	var str = "https://infinite-crag-79113.herokuapp.com/api/objects/";
-	var str = str.concat(objects[i].uid);
+
+	var str = weburl.concat(objects[i].uid);
 	arr.push({"url": str});	
 	}
 	res.send(arr);
@@ -70,6 +67,7 @@ app.post('/api/objects', function (req, res) {
 		if(inputkeys[i] != 'uid')
 			tmp[inputkeys[i]] = inputvalues[i];
 	}
+
 	objects.push(tmp);
 	res.send(tmp);
 });
@@ -100,8 +98,8 @@ app.delete('/api/objects/:uid', function (req, res) {
 		res.status(404).send('didnt find');
 	const index = objects.indexOf(cc);
 	objects.splice(index, 1);
-
-	res.send(cc);
+	return;
+	//res.send(cc);
 });
 
 
