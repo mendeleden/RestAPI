@@ -94,7 +94,7 @@ app.delete('/api/objects/:uid', function (req, res) {
 	res.send();
 });
 
-function errReturn(verb, url, txt){. //format error response object
+function errReturn(verb, url, txt){ //format error response object
 	var err = {
 		"verb" : verb,
 		"url" : weburl.concat(url),
